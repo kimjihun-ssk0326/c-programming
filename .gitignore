@@ -1,3 +1,4 @@
+
 # Prerequisites
 *.d
 
@@ -50,3 +51,64 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build results
+*.log
+*.vspscc
+*.vssscc
+*.cache
+*.db
+*.tlog
+*.lastbuildstate
+*.idb
+*.pdb
+*.ipch
+*.obj
+*.aps
+*.ncb
+*.sdf
+*.opensdf
+*.sbr
+*.iobj
+*.ipdb
+*.pgc
+*.pgd
+
+# VS project and solution files
+*.vcxproj*
+*.vcproj*
+*.sln
+*.vcxproj.filters
+*.vcxproj.user
+
+# Visual Studio directories
+.vs/
+_Debug/
+_Release/
+x64/
+Debug/
+Release/
+ipch/
+[Bb]uild/
+[Aa][Rr][Mm]/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+
+# VS Code 설정 무시
+.vscode/
+
+# macOS 파일 무시
+.DS_Store
+
+# Windows Thumbnail/Explorer 설정 파일
+Thumbs.db
+ehthumbs.db
+Desktop.ini
