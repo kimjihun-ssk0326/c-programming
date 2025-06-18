@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\wocho\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\c-programming\\2025\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A536071B-0EF9-439F-9939-1840B21CB2AE}|2025\\2025.vcxproj|C:\\Users\\wocho\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\c-programming\\2025\\2025\\11\uC7A5.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A536071B-0EF9-439F-9939-1840B21CB2AE}|2025\\2025.vcxproj|solutionrelative:2025\\11\uC7A5.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "11\uC7A5.c",
+              "DocumentMoniker": "C:\\Users\\wocho\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\c-programming\\2025\\2025\\11\uC7A5.c",
+              "RelativeDocumentMoniker": "2025\\11\uC7A5.c",
+              "ToolTip": "C:\\Users\\wocho\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\c-programming\\2025\\2025\\11\uC7A5.c",
+              "RelativeToolTip": "2025\\11\uC7A5.c",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2025-06-13T07:04:10.164Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
