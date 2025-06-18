@@ -1,0 +1,245 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <conio.h>
+#include <windows.h>
+
+#define UP 0
+#define DOWN 1
+#define LEFT 2
+#define RIGHT 3
+#define MAX_LENGTH 100
+
+void printHearts(int life) {
+    printf("생명: ");
+    for (int i = 0; i < life; i++) {
+        printf("♥ ");
+    }
+    printf("\n\n");
+}
+
+// 정면 얼굴 출력 (화면 클리어 없음)
+void printFaceDefault(int life) {
+    printHearts(life);
+    printf("   _______\n");
+    printf("  /       \\\n");
+    printf(" |  O   O  |\n");
+    printf(" |    ^    |\n");
+    printf(" |  \\___/  |\n");
+    printf("  \\_______/\n");
+}
+
+void printFace(int dir, int life) {
+    printHearts(life);
+
+    switch (dir) {
+    case UP:
+        printf("   _______\n");
+        printf("  /  O O  \\\n");
+        printf(" |    ^    |\n");
+        printf(" |  \\___/  |\n");
+        printf(" |         |\n");
+        printf("  \\_______/\n");
+        break;
+    case DOWN:
+        printf("  _______ \n");
+        printf(" /       \\\n");
+        printf("|         |\n");
+        printf("|         |\n");
+        printf("|    O  O  )\n");
+        printf("|      ^  |\n");
+        printf(" \\____'__/ \n");
+        break;
+    case LEFT:
+        printf("     ______\n");
+        printf("    /      \\\n");
+        printf("   O O      |\n");
+        printf("  ( <       |\n");
+        printf("   \\___/    |\n");
+        printf("    \\______/\n");
+        break;
+    case RIGHT:
+        printf("      ______\n");
+        printf("     /      \\\n");
+        printf("    |      O O\n");
+        printf("    |       > )\n");
+        printf("    |     \\___/\n");
+        printf("     \\______/\n");
+        break;
+    }
+}
+
+int getRandomDirection() {
+    return rand() % 4; // 0~3 중 하나
+}
+
+int waitForArrowKey() {
+    int key = _getch();
+    if (key == 224) { // 방향키는 224로 시작
+        key = _getch();
+        switch (key) {
+        case 72: return UP;    // ↑
+        case 80: return DOWN;  // ↓
+        case 75: return LEFT;  // ←
+        case 77: return RIGHT; // →
+        }
+    }
+    return -1; // 방향키 아닌 경우
+}
+
+void startMemoryGame() {
+    srand((unsigned int)time(NULL));
+
+    int sequence[MAX_LENGTH];
+    int life = 3;
+    int round = 1;
+
+    while (life > 0) {
+        system("cls");
+        printf("=== 참참참 기억 게임 ===\n");
+        printf("라운드 %d, 목숨: %d\n\n", round, life);
+        printf("화면에 나온 방향을 기억해서, 방향키로 입력하세요.\n\n");
+
+        // 준비시간에 정면 얼굴 보여주기 (cls는 여기서 한 번)
+        system("cls");
+        printf("라운드 %d, 목숨: %d\n\n", round, life);
+        printFaceDefault(life);
+        Sleep(1500);
+
+        // 새 방향 추가
+        sequence[round - 1] = getRandomDirection();
+
+        // 시퀀스 보여주기
+        for (int i = 0; i < round; i++) {
+            system("cls");
+            printf("라운드 %d, 목숨: %d\n\n", round, life);
+            printFace(sequence[i], life);
+            Sleep(800);
+            Sleep(300);
+        }
+
+        // 시퀀스 모두 보여준 후 정면 얼굴 보여주기
+        system("cls");
+        printf("라운드 %d, 목숨: %d\n\n", round, life);
+        printFaceDefault(life);
+        Sleep(800);
+
+        // 플레이어 입력 받기
+        int failed = 0;
+        for (int i = 0; i < round; i++) {
+            printf("입력 %d번째 방향키: ", i + 1);
+            int input = waitForArrowKey();
+            if (input == -1) {
+                printf("방향키를 입력하세요!\n");
+                i--; // 다시 입력 받기
+                continue;
+            }
+            printf("\n");
+
+            if (input != sequence[i]) {
+                printf("틀렸습니다!\n");
+                life--;
+                Sleep(1000);
+                failed = 1;
+                break;
+            }
+        }
+
+        if (life == 0) {
+            system("cls");
+            printf("목숨이 모두 없어졌습니다. 게임 오버!\n");
+            break;
+        }
+
+        if (!failed) {
+            printf("정답입니다! 다음 라운드로 넘어갑니다.\n");
+            round++;
+            Sleep(1000);
+            system("cls");
+        }
+
+        if (round > MAX_LENGTH) {
+            printf("축하합니다! 모든 라운드를 클리어했습니다!\n");
+            break;
+        }
+    }
+
+    printf("게임 종료\n");
+    system("pause");
+}
+
+void printMenu(int selected) {
+    system("cls");
+    printf("              ====== 메인 메뉴 ======\n\n");
+
+    const char* options[] = {
+        "참참참 게임",
+        "방향 기억하기 게임",
+        "게임 설명",
+        "게임 종료"
+    };
+
+    for (int i = 0; i < 4; i++) {
+        if (i == selected)
+            printf("                    <%s>\n", options[i]);
+        else
+            printf("                     %s\n", options[i]);
+    }
+}
+
+void showDescription() {
+    system("cls");
+    printf("게임 설명!\n\n");
+    printf("1. 참참참 게임: 방향키를 이용해 맞추는 게임\n");
+    printf("2. 방향 기억하기 게임: 화면에 나온 방향을 기억해 방향키로 입력하세요.\n\n");
+    system("pause");
+}
+
+// 간단 참참참 게임 자리
+void startChamChamCham() {
+    system("cls");
+    printf("참참참 게임을 시작합니다...\n\n");
+    printf("(실제 게임 코드가 들어갈 자리입니다)\n");
+    system("pause");
+}
+
+int main(void) {
+    int selected = 0;
+    int key;
+
+    while (1) {
+        printMenu(selected);
+        key = _getch();
+
+        if (key == 224) {
+            key = _getch();
+            if (key == 72) {
+                selected--;
+                if (selected < 0) selected = 3;
+            }
+            else if (key == 80) {
+                selected++;
+                if (selected > 3) selected = 0;
+            }
+        }
+        else if (key == 13) {
+            switch (selected) {
+            case 0:
+                startChamChamCham();
+                break;
+            case 1:
+                startMemoryGame();
+                break;
+            case 2:
+                showDescription();
+                break;
+            case 3:
+                system("cls");
+                printf("게임을 종료합니다.\n");
+                return 0;
+            }
+        }
+    }
+    return 0;
+}
